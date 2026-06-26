@@ -4,170 +4,338 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hummingbird Temple Codes Raffle</title>
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --night: #150714;
+      --plum: #2a0e28;
+      --rose: #f6a8cf;
+      --gold: #d8ae57;
+      --softGold: #ffe2a6;
+      --cream: #fff7ea;
+      --muted: rgba(255, 247, 234, 0.72);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Georgia, serif;
-      background: radial-gradient(circle at top, #5b183f, #180a18 65%);
-      color: #fff3dd;
       min-height: 100vh;
-      padding: 24px;
+      font-family: 'Inter', sans-serif;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(246,168,207,0.28), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(216,174,87,0.22), transparent 24%),
+        linear-gradient(160deg, #150714 0%, #2a0e28 48%, #090407 100%);
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,226,166,0.75) 1px, transparent 1px),
+        radial-gradient(circle, rgba(246,168,207,0.45) 1px, transparent 1px);
+      background-size: 90px 90px, 140px 140px;
+      animation: drift 18s linear infinite;
+      opacity: 0.55;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-90px); }
+    }
+
+    main {
+      min-height: 100vh;
+      padding: 28px 18px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .card {
-      max-width: 580px;
-      background: rgba(24, 10, 24, 0.88);
-      border: 1px solid #d6a84f;
-      border-radius: 28px;
-      padding: 40px;
+    .portal {
+      width: 100%;
+      max-width: 440px;
+      padding: 34px 24px 28px;
+      border: 1px solid rgba(216,174,87,0.55);
+      border-radius: 34px;
+      background: rgba(12, 5, 12, 0.72);
+      backdrop-filter: blur(18px);
+      box-shadow:
+        0 28px 80px rgba(0,0,0,0.45),
+        0 0 45px rgba(216,174,87,0.12);
       text-align: center;
-      box-shadow: 0 0 50px rgba(244, 167, 197, 0.22);
+      animation: rise 900ms ease both;
     }
 
-    .symbol {
-      font-size: 34px;
-      margin-bottom: 12px;
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bird {
+      font-size: 30px;
+      margin-bottom: 14px;
+      color: var(--gold);
+      letter-spacing: 8px;
     }
 
     h1 {
-      color: #f4a7c5;
-      font-size: 38px;
-      margin: 0 0 14px;
-      line-height: 1.1;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 13vw, 62px);
+      line-height: 0.88;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -1px;
     }
 
-    .gold {
-      color: #d6a84f;
+    h1 span {
+      display: block;
+      color: var(--rose);
     }
 
-    p {
-      line-height: 1.6;
-      font-size: 16px;
+    .subtitle {
+      margin: 18px auto 0;
+      max-width: 330px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
     }
 
-    .prize {
-      margin: 24px 0;
-      padding: 18px;
-      border: 1px solid #d6a84f;
-      border-radius: 18px;
-      background: rgba(214, 168, 79, 0.08);
-      font-size: 18px;
+    .divider {
+      width: 68px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 24px auto;
+    }
+
+    .prize-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 76px;
+      line-height: 0.95;
+      color: var(--softGold);
+      margin: 0;
+    }
+
+    .gift {
+      font-size: 15px;
+      color: var(--cream);
+      margin-top: 8px;
+    }
+
+    form {
+      margin-top: 26px;
     }
 
     input[type="text"],
     input[type="email"] {
       width: 100%;
-      padding: 15px;
-      margin: 9px 0;
-      border-radius: 14px;
-      border: 1px solid #d6a84f;
-      background: #120712;
-      color: #fff3dd;
-      font-size: 15px;
-      box-sizing: border-box;
+      border: 1px solid rgba(216,174,87,0.45);
+      border-radius: 999px;
+      padding: 15px 17px;
+      margin-bottom: 11px;
+      background: rgba(255,255,255,0.055);
+      color: var(--cream);
+      outline: none;
+      font-size: 14px;
     }
 
-    label {
-      display: block;
-      font-size: 13px;
-      line-height: 1.45;
+    input::placeholder {
+      color: rgba(255,247,234,0.48);
+    }
+
+    input:focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 3px rgba(246,168,207,0.12);
+    }
+
+    .consent {
+      display: flex;
+      gap: 10px;
       text-align: left;
-      margin: 14px 0;
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: rgba(255,247,234,0.67);
+      margin: 8px 2px 18px;
     }
 
-    label input {
-      margin-right: 8px;
+    .consent input {
+      margin-top: 3px;
+      accent-color: var(--gold);
     }
 
     button {
+      position: relative;
       width: 100%;
-      padding: 16px;
-      margin-top: 8px;
       border: none;
       border-radius: 999px;
-      background: linear-gradient(90deg, #d6a84f, #f4a7c5);
-      color: #180a18;
-      font-weight: bold;
-      font-size: 16px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, var(--gold), var(--softGold), var(--rose));
+      color: #170817;
+      font-weight: 700;
+      font-size: 15px;
       cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(216,174,87,0.22);
     }
 
-    button:hover {
-      opacity: 0.9;
+    button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+      transform: skewX(-18deg);
+      animation: shine 3.8s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -80%; }
+      45% { left: 130%; }
+      100% { left: 130%; }
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(255,247,234,0.58);
     }
 
     .success {
       display: none;
-      margin-top: 20px;
-      color: #d6a84f;
-      font-size: 17px;
+      padding: 28px 8px 4px;
+      animation: rise 700ms ease both;
     }
 
-    .footer {
-      margin-top: 26px;
-      font-size: 12px;
-      opacity: 0.75;
-      line-height: 1.5;
+    .success h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 46px;
+      margin: 0 0 10px;
+      color: var(--softGold);
     }
 
-    .footer a {
-      color: #f4a7c5;
+    .success p {
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .tiny {
+      margin-top: 24px;
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: rgba(255,247,234,0.45);
+    }
+
+    .tiny a {
+      color: var(--rose);
+      text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+      .portal {
+        max-width: 520px;
+        padding: 46px 42px 36px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="symbol">𓆃 ✦ 🕊️</div>
+  <div class="stars"></div>
 
-    <h1>Hummingbird<br><span class="gold">Temple Codes Raffle</span></h1>
+  <main>
+    <section class="portal" id="portal">
+      <div id="formView">
+        <div class="bird">✦ 𓆃 ✦</div>
 
-    <p>
-      Enter the golden-pink portal and receive the chance to win a
-      <strong>€555 Temple Code Gift Card</strong>.
-    </p>
+        <h1>
+          Hummingbird
+          <span>Temple Codes</span>
+        </h1>
 
-    <p>
-      A little offering from Temple Code — for the ones who feel called by
-      symbols, beauty, movement and sacred signatures.
-    </p>
+        <p class="subtitle">
+          A golden-pink portal for those who feel called by symbols, beauty,
+          movement and sacred signatures.
+        </p>
 
-    <div class="prize">
-      ✨ Win a <strong>€555 Gift Card</strong><br>
-      for the Temple Code Shop
-    </div>
+        <div class="divider"></div>
 
-    <form id="raffleForm">
-      <input type="text" name="name" placeholder="Your name" required />
-      <input type="email" name="email" placeholder="Your email" required />
-      <input type="text" name="instagram" placeholder="Instagram handle optional" />
+        <div class="prize-label">Enter for a chance to win</div>
+        <p class="amount">€555</p>
+        <div class="gift">Temple Code Gift Card</div>
 
-      <label>
-        <input type="checkbox" name="consent" required />
-        I agree to enter the raffle and receive emails from Temple Code about this giveaway,
-        future offerings and community updates. I can unsubscribe anytime.
-      </label>
+        <form id="raffleForm">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Where may we send the magic?" required />
+          <input type="text" name="instagram" placeholder="Instagram handle optional" />
 
-      <button type="submit">Enter the Raffle ✨</button>
-    </form>
+          <label class="consent">
+            <input type="checkbox" name="consent" required />
+            <span>
+              I agree to enter the raffle and receive emails from Temple Code about this giveaway,
+              future offerings and community updates. I can unsubscribe anytime.
+            </span>
+          </label>
 
-    <div class="success" id="successMessage">
-      Thank you, beautiful soul. You’re entered. ✨
-    </div>
+          <button type="submit">Enter the Portal ✨</button>
+        </form>
 
-    <div class="footer">
-      By entering, you agree that your data will be stored for the purpose of this raffle
-      and Temple Code communications. Your data will not be sold or shared.
-      You can request deletion anytime via email.
-    </div>
-  </div>
+        <p class="note">
+          Every participant becomes part of the Temple Code circle and receives early whispers
+          about future drops, codes and community offerings.
+        </p>
+
+        <p class="tiny">
+          By entering, your data will be stored for the purpose of this raffle and Temple Code communications.
+          Your data will not be sold or shared. You can request deletion anytime via email.
+        </p>
+      </div>
+
+      <div class="success" id="successView">
+        <div class="bird">✦ 🕊️ ✦</div>
+        <h2>Welcome.</h2>
+        <p>
+          You have entered the Temple.<br>
+          Thank you for joining the Hummingbird Codes Raffle.
+          We’ll be in touch soon.
+        </p>
+      </div>
+    </section>
+  </main>
 
   <script>
     const form = document.getElementById("raffleForm");
-    const successMessage = document.getElementById("successMessage");
+    const formView = document.getElementById("formView");
+    const successView = document.getElementById("successView");
 
     form.addEventListener("submit", async function(e) {
       e.preventDefault();
@@ -181,13 +349,19 @@
         consent: formData.get("consent") ? "yes" : "no"
       };
 
-      await fetch("https://script.google.com/macros/s/AKfycbzMzVtbewdyA7XZZtwxSs0394WCzWFet9lclap6lF8xq_KkstmQbViUfLG5AvGrICXm/exec", {
-        method: "POST",
-        body: JSON.stringify(data)
-      });
+      try {
+        await fetch("https://script.google.com/macros/s/AKfycbzMzVtbewdyA7XZZtwxSs0394WCzWFet9lclap6lF8xq_KkstmQbViUfLG5AvGrICXm/exec", {
+          method: "POST",
+          body: JSON.stringify(data)
+        });
 
-      form.reset();
-      successMessage.style.display = "block";
+        form.reset();
+        formView.style.display = "none";
+        successView.style.display = "block";
+
+      } catch (error) {
+        alert("Something went wrong. Please try again.");
+      }
     });
   </script>
 </body>
