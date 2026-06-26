@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hummingbird Temple Codes Raffle</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background: radial-gradient(circle at top, #5b183f, #180a18 65%);
+      color: #fff3dd;
+      min-height: 100vh;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      max-width: 580px;
+      background: rgba(24, 10, 24, 0.88);
+      border: 1px solid #d6a84f;
+      border-radius: 28px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(244, 167, 197, 0.22);
+    }
+
+    .symbol {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      color: #f4a7c5;
+      font-size: 38px;
+      margin: 0 0 14px;
+      line-height: 1.1;
+    }
+
+    .gold {
+      color: #d6a84f;
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .prize {
+      margin: 24px 0;
+      padding: 18px;
+      border: 1px solid #d6a84f;
+      border-radius: 18px;
+      background: rgba(214, 168, 79, 0.08);
+      font-size: 18px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 15px;
+      margin: 9px 0;
+      border-radius: 14px;
+      border: 1px solid #d6a84f;
+      background: #120712;
+      color: #fff3dd;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      line-height: 1.45;
+      text-align: left;
+      margin: 14px 0;
+    }
+
+    label input {
+      margin-right: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      margin-top: 8px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #d6a84f, #f4a7c5);
+      color: #180a18;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .success {
+      display: none;
+      margin-top: 20px;
+      color: #d6a84f;
+      font-size: 17px;
+    }
+
+    .footer {
+      margin-top: 26px;
+      font-size: 12px;
+      opacity: 0.75;
+      line-height: 1.5;
+    }
+
+    .footer a {
+      color: #f4a7c5;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="symbol">𓆃 ✦ 🕊️</div>
+
+    <h1>Hummingbird<br><span class="gold">Temple Codes Raffle</span></h1>
+
+    <p>
+      Enter the golden-pink portal and receive the chance to win a
+      <strong>€555 Temple Code Gift Card</strong>.
+    </p>
+
+    <p>
+      A little offering from Temple Code — for the ones who feel called by
+      symbols, beauty, movement and sacred signatures.
+    </p>
+
+    <div class="prize">
+      ✨ Win a <strong>€555 Gift Card</strong><br>
+      for the Temple Code Shop
+    </div>
+
+    <form id="raffleForm">
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="email" name="email" placeholder="Your email" required />
+      <input type="text" name="instagram" placeholder="Instagram handle optional" />
+
+      <label>
+        <input type="checkbox" name="consent" required />
+        I agree to enter the raffle and receive emails from Temple Code about this giveaway,
+        future offerings and community updates. I can unsubscribe anytime.
+      </label>
+
+      <button type="submit">Enter the Raffle ✨</button>
+    </form>
+
+    <div class="success" id="successMessage">
+      Thank you, beautiful soul. You’re entered. ✨
+    </div>
+
+    <div class="footer">
+      By entering, you agree that your data will be stored for the purpose of this raffle
+      and Temple Code communications. Your data will not be sold or shared.
+      You can request deletion anytime via email.
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("raffleForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      const data = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        instagram: formData.get("instagram"),
+        consent: formData.get("consent") ? "yes" : "no"
+      };
+
+      await fetch("https://script.google.com/macros/s/AKfycbzMzVtbewdyA7XZZtwxSs0394WCzWFet9lclap6lF8xq_KkstmQbViUfLG5AvGrICXm/exec", {
+        method: "POST",
+        body: JSON.stringify(data)
+      });
+
+      form.reset();
+      successMessage.style.display = "block";
+    });
+  </script>
+</body>
+</html>
